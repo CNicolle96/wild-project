@@ -1,0 +1,611 @@
+
+Directory Server Diagnosis
+
+Performing initial setup:
+   Trying to find home server...
+   * Verifying that the local machine Addax, is a Directory Server. 
+   Home Server = Addax
+   * Connecting to directory service on server Addax.
+   * Identified AD Forest. 
+   Collecting AD specific global data 
+   * Collecting site info.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=eko,DC=lan,LDAP_SCOPE_SUBTREE,(objectCategory=ntDSSiteSettings),.......
+   The previous call succeeded 
+   Iterating through the sites 
+   Looking at base site object: CN=NTDS Site Settings,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+   Getting ISTG and options for the site
+   * Identifying all servers.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=eko,DC=lan,LDAP_SCOPE_SUBTREE,(objectClass=ntDSDsa),.......
+   The previous call succeeded....
+   The previous call succeeded
+   Iterating through the list of servers 
+   Getting information for the server CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   Getting information for the server CN=NTDS Settings,CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   Getting information for the server CN=NTDS Settings,CN=FULIGULE,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   Getting information for the server CN=NTDS Settings,CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   Getting information for the server CN=NTDS Settings,CN=WALLABY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   * Identifying all NC cross-refs.
+   * Found 5 DC(s). Testing 5 of them.
+   Done gathering initial info.
+
+Doing initial required tests
+   
+   Testing server: Default-First-Site-Name\ADDAX
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... ADDAX passed test Connectivity
+   
+   Testing server: Default-First-Site-Name\AXOLOTL
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... AXOLOTL passed test Connectivity
+   
+   Testing server: Default-First-Site-Name\FULIGULE
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... FULIGULE passed test Connectivity
+   
+   Testing server: Default-First-Site-Name\ANOLIS
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... ANOLIS passed test Connectivity
+   
+   Testing server: Default-First-Site-Name\WALLABY
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... WALLABY passed test Connectivity
+
+Doing primary tests
+   
+   Testing server: Default-First-Site-Name\ADDAX
+      Starting test: Advertising
+         The DC ADDAX is advertising itself as a DC and having a DS.
+         The DC ADDAX is advertising as an LDAP server
+         The DC ADDAX is advertising as having a writeable directory
+         The DC ADDAX is advertising as a Key Distribution Center
+         The DC ADDAX is advertising as a time server
+         The DS ADDAX is advertising as a GC.
+         ......................... ADDAX passed test Advertising
+      Test omitted by user request: CheckSecurityError
+      Test omitted by user request: CutoffServers
+      Starting test: FrsEvent
+         * The File Replication Service Event log test 
+         Skip the test because the server is running DFSR.
+         ......................... ADDAX passed test FrsEvent
+      Starting test: DFSREvent
+         The DFS Replication Event Log. 
+         ......................... ADDAX passed test DFSREvent
+      Starting test: SysVolCheck
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... ADDAX passed test SysVolCheck
+      Starting test: KccEvent
+         * The KCC Event log test
+         Found no KCC errors in "Directory Service" Event log in the last 15 minutes.
+         ......................... ADDAX passed test KccEvent
+      Starting test: KnowsOfRoleHolders
+         Role Schema Owner = CN=NTDS Settings,CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Domain Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role PDC Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Rid Owner = CN=NTDS Settings,CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Infrastructure Update Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         ......................... ADDAX passed test KnowsOfRoleHolders
+      Starting test: MachineAccount
+         Checking machine account for DC ADDAX on DC ADDAX.
+         * SPN found :LDAP/Addax.eko.lan/eko.lan
+         * SPN found :LDAP/Addax.eko.lan
+         * SPN found :LDAP/ADDAX
+         * SPN found :LDAP/Addax.eko.lan/EKO
+         * SPN found :LDAP/a34af589-fe91-4c64-b18a-ec9a3a29b3ed._msdcs.eko.lan
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/a34af589-fe91-4c64-b18a-ec9a3a29b3ed/eko.lan
+         * SPN found :HOST/Addax.eko.lan/eko.lan
+         * SPN found :HOST/Addax.eko.lan
+         * SPN found :HOST/ADDAX
+         * SPN found :HOST/Addax.eko.lan/EKO
+         * SPN found :GC/Addax.eko.lan/eko.lan
+         ......................... ADDAX passed test MachineAccount
+      Starting test: NCSecDesc
+         * Security Permissions check for all NC's on DC ADDAX.
+         * Security Permissions Check for
+           DC=ForestDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           DC=DomainDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           CN=Schema,CN=Configuration,DC=eko,DC=lan
+            (Schema,Version 3)
+         * Security Permissions Check for
+           CN=Configuration,DC=eko,DC=lan
+            (Configuration,Version 3)
+         * Security Permissions Check for
+           DC=eko,DC=lan
+            (Domain,Version 3)
+         ......................... ADDAX passed test NCSecDesc
+      Starting test: NetLogons
+         * Network Logons Privileges Check
+         Verified share \\ADDAX\netlogon
+         Verified share \\ADDAX\sysvol
+         ......................... ADDAX passed test NetLogons
+      Starting test: ObjectsReplicated
+         ADDAX is in domain DC=eko,DC=lan
+         Checking for CN=ADDAX,OU=Domain Controllers,DC=eko,DC=lan in domain DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         Checking for CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan in domain CN=Configuration,DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         ......................... ADDAX passed test ObjectsReplicated
+      Test omitted by user request: OutboundSecureChannels
+      Starting test: Replications
+         * Replications Check
+         * Replication Latency Check
+         ......................... ADDAX passed test Replications
+      Starting test: RidManager
+         * Available RID Pool for the Domain is 4602 to 1073741823
+         * Axolotl.eko.lan is the RID Master
+         * DsBind with RID Master was successful
+         * rIDAllocationPool is 2102 to 2601
+         * rIDPreviousAllocationPool is 1102 to 1601
+         * rIDNextRID: 1546
+         * Warning :There is less than 12% available RIDs in the current pool
+         ......................... ADDAX passed test RidManager
+      Starting test: Services
+         * Checking Service: EventSystem
+         * Checking Service: RpcSs
+         * Checking Service: NTDS
+         * Checking Service: DnsCache
+         * Checking Service: DFSR
+         * Checking Service: IsmServ
+         * Checking Service: kdc
+         * Checking Service: SamSs
+         * Checking Service: LanmanServer
+         * Checking Service: LanmanWorkstation
+         * Checking Service: w32time
+         * Checking Service: NETLOGON
+         ......................... ADDAX passed test Services
+      Starting test: SystemLog
+         * The System Event log test
+         Found no errors in "System" Event log in the last 60 minutes.
+         ......................... ADDAX passed test SystemLog
+      Test omitted by user request: Topology
+      Test omitted by user request: VerifyEnterpriseReferences
+      Starting test: VerifyReferences
+         The system object reference (serverReference)
+         CN=ADDAX,OU=Domain Controllers,DC=eko,DC=lan and backlink on
+         CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (serverReferenceBL)
+         CN=ADDAX,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on
+         CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (msDFSR-ComputerReferenceBL)
+         CN=ADDAX,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on CN=ADDAX,OU=Domain Controllers,DC=eko,DC=lan are
+         correct. 
+         ......................... ADDAX passed test VerifyReferences
+      Test omitted by user request: VerifyReplicas
+   
+   Testing server: Default-First-Site-Name\AXOLOTL
+      Starting test: Advertising
+         The DC AXOLOTL is advertising itself as a DC and having a DS.
+         The DC AXOLOTL is advertising as an LDAP server
+         The DC AXOLOTL is advertising as having a writeable directory
+         The DC AXOLOTL is advertising as a Key Distribution Center
+         The DC AXOLOTL is advertising as a time server
+         The DS AXOLOTL is advertising as a GC.
+         ......................... AXOLOTL passed test Advertising
+      Test omitted by user request: CheckSecurityError
+      Test omitted by user request: CutoffServers
+      Starting test: FrsEvent
+         * The File Replication Service Event log test 
+         Skip the test because the server is running DFSR.
+         ......................... AXOLOTL passed test FrsEvent
+      Starting test: DFSREvent
+         The DFS Replication Event Log. 
+         The event log DFS Replication on server Axolotl.eko.lan could not be
+         queried, error 0x6ba "The RPC server is unavailable."
+         ......................... AXOLOTL failed test DFSREvent
+      Starting test: SysVolCheck
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... AXOLOTL passed test SysVolCheck
+      Starting test: KccEvent
+         * The KCC Event log test
+         The event log Directory Service on server Axolotl.eko.lan could not be
+         queried, error 0x6ba "The RPC server is unavailable."
+         ......................... AXOLOTL failed test KccEvent
+      Starting test: KnowsOfRoleHolders
+         Role Schema Owner = CN=NTDS Settings,CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Domain Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role PDC Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Rid Owner = CN=NTDS Settings,CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Infrastructure Update Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         ......................... AXOLOTL passed test KnowsOfRoleHolders
+      Starting test: MachineAccount
+         Checking machine account for DC AXOLOTL on DC AXOLOTL.
+         * SPN found :LDAP/Axolotl.eko.lan/eko.lan
+         * SPN found :LDAP/Axolotl.eko.lan
+         * SPN found :LDAP/AXOLOTL
+         * SPN found :LDAP/Axolotl.eko.lan/EKO
+         * SPN found :LDAP/7ae6c54b-21af-4208-b337-44f1617896eb._msdcs.eko.lan
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/7ae6c54b-21af-4208-b337-44f1617896eb/eko.lan
+         * SPN found :HOST/Axolotl.eko.lan/eko.lan
+         * SPN found :HOST/Axolotl.eko.lan
+         * SPN found :HOST/AXOLOTL
+         * SPN found :HOST/Axolotl.eko.lan/EKO
+         * SPN found :GC/Axolotl.eko.lan/eko.lan
+         ......................... AXOLOTL passed test MachineAccount
+      Starting test: NCSecDesc
+         * Security Permissions check for all NC's on DC AXOLOTL.
+         * Security Permissions Check for
+           DC=ForestDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           DC=DomainDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           CN=Schema,CN=Configuration,DC=eko,DC=lan
+            (Schema,Version 3)
+         * Security Permissions Check for
+           CN=Configuration,DC=eko,DC=lan
+            (Configuration,Version 3)
+         * Security Permissions Check for
+           DC=eko,DC=lan
+            (Domain,Version 3)
+         ......................... AXOLOTL passed test NCSecDesc
+      Starting test: NetLogons
+         * Network Logons Privileges Check
+         Verified share \\AXOLOTL\netlogon
+         Verified share \\AXOLOTL\sysvol
+         ......................... AXOLOTL passed test NetLogons
+      Starting test: ObjectsReplicated
+         AXOLOTL is in domain DC=eko,DC=lan
+         Checking for CN=AXOLOTL,OU=Domain Controllers,DC=eko,DC=lan in domain DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         Checking for CN=NTDS Settings,CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan in domain CN=Configuration,DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         ......................... AXOLOTL passed test ObjectsReplicated
+      Test omitted by user request: OutboundSecureChannels
+      Starting test: Replications
+         * Replications Check
+         * Replication Latency Check
+         ......................... AXOLOTL passed test Replications
+      Starting test: RidManager
+         * Available RID Pool for the Domain is 4602 to 1073741823
+         * Axolotl.eko.lan is the RID Master
+         * DsBind with RID Master was successful
+         * rIDAllocationPool is 1602 to 2101
+         * rIDPreviousAllocationPool is 1602 to 2101
+         * rIDNextRID: 1605
+         ......................... AXOLOTL passed test RidManager
+      Starting test: Services
+         * Checking Service: EventSystem
+         * Checking Service: RpcSs
+         * Checking Service: NTDS
+         * Checking Service: DnsCache
+         * Checking Service: DFSR
+         * Checking Service: IsmServ
+         * Checking Service: kdc
+         * Checking Service: SamSs
+         * Checking Service: LanmanServer
+         * Checking Service: LanmanWorkstation
+         * Checking Service: w32time
+         * Checking Service: NETLOGON
+         ......................... AXOLOTL passed test Services
+      Starting test: SystemLog
+         * The System Event log test
+         The event log System on server Axolotl.eko.lan could not be queried,
+         error 0x6ba "The RPC server is unavailable."
+         ......................... AXOLOTL failed test SystemLog
+      Test omitted by user request: Topology
+      Test omitted by user request: VerifyEnterpriseReferences
+      Starting test: VerifyReferences
+         The system object reference (serverReference)
+         CN=AXOLOTL,OU=Domain Controllers,DC=eko,DC=lan and backlink on
+         CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (serverReferenceBL)
+         CN=AXOLOTL,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on
+         CN=NTDS Settings,CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (msDFSR-ComputerReferenceBL)
+         CN=AXOLOTL,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on CN=AXOLOTL,OU=Domain Controllers,DC=eko,DC=lan are
+         correct. 
+         ......................... AXOLOTL passed test VerifyReferences
+      Test omitted by user request: VerifyReplicas
+   
+   Testing server: Default-First-Site-Name\FULIGULE
+      Starting test: Advertising
+         The DC FULIGULE is advertising itself as a DC and having a DS.
+         The DC FULIGULE is advertising as an LDAP server
+         The DC FULIGULE is advertising as having a writeable directory
+         The DC FULIGULE is advertising as a Key Distribution Center
+         The DC FULIGULE is advertising as a time server
+         The DS FULIGULE is advertising as a GC.
+         ......................... FULIGULE passed test Advertising
+      Test omitted by user request: CheckSecurityError
+      Test omitted by user request: CutoffServers
+      Starting test: FrsEvent
+         * The File Replication Service Event log test 
+         Skip the test because the server is running DFSR.
+         ......................... FULIGULE passed test FrsEvent
+      Starting test: DFSREvent
+         The DFS Replication Event Log. 
+         ......................... FULIGULE passed test DFSREvent
+      Starting test: SysVolCheck
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... FULIGULE passed test SysVolCheck
+      Starting test: KccEvent
+         * The KCC Event log test
+         Found no KCC errors in "Directory Service" Event log in the last 15 minutes.
+         ......................... FULIGULE passed test KccEvent
+      Starting test: KnowsOfRoleHolders
+         Role Schema Owner = CN=NTDS Settings,CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Domain Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role PDC Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Rid Owner = CN=NTDS Settings,CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Infrastructure Update Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         ......................... FULIGULE passed test KnowsOfRoleHolders
+      Starting test: MachineAccount
+         Checking machine account for DC FULIGULE on DC FULIGULE.
+         * SPN found :LDAP/Fuligule.eko.lan/eko.lan
+         * SPN found :LDAP/Fuligule.eko.lan
+         * SPN found :LDAP/FULIGULE
+         * SPN found :LDAP/Fuligule.eko.lan/EKO
+         * SPN found :LDAP/d1632d68-f78b-4831-89fb-65b575147447._msdcs.eko.lan
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/d1632d68-f78b-4831-89fb-65b575147447/eko.lan
+         * SPN found :HOST/Fuligule.eko.lan/eko.lan
+         * SPN found :HOST/Fuligule.eko.lan
+         * SPN found :HOST/FULIGULE
+         * SPN found :HOST/Fuligule.eko.lan/EKO
+         * SPN found :GC/Fuligule.eko.lan/eko.lan
+         ......................... FULIGULE passed test MachineAccount
+      Starting test: NCSecDesc
+         * Security Permissions check for all NC's on DC FULIGULE.
+         * Security Permissions Check for
+           DC=ForestDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           DC=DomainDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           CN=Schema,CN=Configuration,DC=eko,DC=lan
+            (Schema,Version 3)
+         * Security Permissions Check for
+           CN=Configuration,DC=eko,DC=lan
+            (Configuration,Version 3)
+         * Security Permissions Check for
+           DC=eko,DC=lan
+            (Domain,Version 3)
+         ......................... FULIGULE passed test NCSecDesc
+      Starting test: NetLogons
+         * Network Logons Privileges Check
+         Verified share \\FULIGULE\netlogon
+         Verified share \\FULIGULE\sysvol
+         ......................... FULIGULE passed test NetLogons
+      Starting test: ObjectsReplicated
+         FULIGULE is in domain DC=eko,DC=lan
+         Checking for CN=FULIGULE,OU=Domain Controllers,DC=eko,DC=lan in domain DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         Checking for CN=NTDS Settings,CN=FULIGULE,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan in domain CN=Configuration,DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         ......................... FULIGULE passed test ObjectsReplicated
+      Test omitted by user request: OutboundSecureChannels
+      Starting test: Replications
+         * Replications Check
+         * Replication Latency Check
+         ......................... FULIGULE passed test Replications
+      Starting test: RidManager
+         * Available RID Pool for the Domain is 4602 to 1073741823
+         * Axolotl.eko.lan is the RID Master
+         * DsBind with RID Master was successful
+         * rIDAllocationPool is 2602 to 3101
+         * rIDPreviousAllocationPool is 2602 to 3101
+         * rIDNextRID: 2604
+         ......................... FULIGULE passed test RidManager
+      Starting test: Services
+         * Checking Service: EventSystem
+         * Checking Service: RpcSs
+         * Checking Service: NTDS
+         * Checking Service: DnsCache
+         * Checking Service: DFSR
+         * Checking Service: IsmServ
+         * Checking Service: kdc
+         * Checking Service: SamSs
+         * Checking Service: LanmanServer
+         * Checking Service: LanmanWorkstation
+         * Checking Service: w32time
+         * Checking Service: NETLOGON
+         ......................... FULIGULE passed test Services
+      Starting test: SystemLog
+         * The System Event log test
+         Found no errors in "System" Event log in the last 60 minutes.
+         ......................... FULIGULE passed test SystemLog
+      Test omitted by user request: Topology
+      Test omitted by user request: VerifyEnterpriseReferences
+      Starting test: VerifyReferences
+         The system object reference (serverReference)
+         CN=FULIGULE,OU=Domain Controllers,DC=eko,DC=lan and backlink on
+         CN=FULIGULE,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (serverReferenceBL)
+         CN=FULIGULE,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on
+         CN=NTDS Settings,CN=FULIGULE,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (msDFSR-ComputerReferenceBL)
+         CN=FULIGULE,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on CN=FULIGULE,OU=Domain Controllers,DC=eko,DC=lan are
+         correct. 
+         ......................... FULIGULE passed test VerifyReferences
+      Test omitted by user request: VerifyReplicas
+   
+   Testing server: Default-First-Site-Name\ANOLIS
+      Starting test: Advertising
+         The DC ANOLIS is advertising itself as a DC and having a DS.
+         The DC ANOLIS is advertising as an LDAP server
+         The DC ANOLIS is advertising as having a writeable directory
+         The DC ANOLIS is advertising as a Key Distribution Center
+         The DC ANOLIS is advertising as a time server
+         The DS ANOLIS is advertising as a GC.
+         ......................... ANOLIS passed test Advertising
+      Test omitted by user request: CheckSecurityError
+      Test omitted by user request: CutoffServers
+      Starting test: FrsEvent
+         * The File Replication Service Event log test 
+         Skip the test because the server is running DFSR.
+         ......................... ANOLIS passed test FrsEvent
+      Starting test: DFSREvent
+         The DFS Replication Event Log. 
+         The event log DFS Replication on server Anolis.eko.lan could not be
+         queried, error 0x6ba "The RPC server is unavailable."
+         ......................... ANOLIS failed test DFSREvent
+      Starting test: SysVolCheck
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... ANOLIS passed test SysVolCheck
+      Starting test: KccEvent
+         * The KCC Event log test
+         The event log Directory Service on server Anolis.eko.lan could not be
+         queried, error 0x6ba "The RPC server is unavailable."
+         ......................... ANOLIS failed test KccEvent
+      Starting test: KnowsOfRoleHolders
+         Role Schema Owner = CN=NTDS Settings,CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Domain Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role PDC Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Rid Owner = CN=NTDS Settings,CN=AXOLOTL,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         Role Infrastructure Update Owner = CN=NTDS Settings,CN=ADDAX,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         ......................... ANOLIS passed test KnowsOfRoleHolders
+      Starting test: MachineAccount
+         Checking machine account for DC ANOLIS on DC ANOLIS.
+         * SPN found :LDAP/Anolis.eko.lan/eko.lan
+         * SPN found :LDAP/Anolis.eko.lan
+         * SPN found :LDAP/ANOLIS
+         * SPN found :LDAP/Anolis.eko.lan/EKO
+         * SPN found :LDAP/2e8bc76e-30ec-436d-9c87-ebf3a6083d65._msdcs.eko.lan
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/2e8bc76e-30ec-436d-9c87-ebf3a6083d65/eko.lan
+         * SPN found :HOST/Anolis.eko.lan/eko.lan
+         * SPN found :HOST/Anolis.eko.lan
+         * SPN found :HOST/ANOLIS
+         * SPN found :HOST/Anolis.eko.lan/EKO
+         * SPN found :GC/Anolis.eko.lan/eko.lan
+         ......................... ANOLIS passed test MachineAccount
+      Starting test: NCSecDesc
+         * Security Permissions check for all NC's on DC ANOLIS.
+         * Security Permissions Check for
+           DC=ForestDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           DC=DomainDnsZones,DC=eko,DC=lan
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           CN=Schema,CN=Configuration,DC=eko,DC=lan
+            (Schema,Version 3)
+         * Security Permissions Check for
+           CN=Configuration,DC=eko,DC=lan
+            (Configuration,Version 3)
+         * Security Permissions Check for
+           DC=eko,DC=lan
+            (Domain,Version 3)
+         ......................... ANOLIS passed test NCSecDesc
+      Starting test: NetLogons
+         * Network Logons Privileges Check
+         Verified share \\ANOLIS\netlogon
+         Verified share \\ANOLIS\sysvol
+         ......................... ANOLIS passed test NetLogons
+      Starting test: ObjectsReplicated
+         ANOLIS is in domain DC=eko,DC=lan
+         Checking for CN=ANOLIS,OU=Domain Controllers,DC=eko,DC=lan in domain DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         Checking for CN=NTDS Settings,CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan in domain CN=Configuration,DC=eko,DC=lan on 5 servers
+            Object is up-to-date on all servers.
+         ......................... ANOLIS passed test ObjectsReplicated
+      Test omitted by user request: OutboundSecureChannels
+      Starting test: Replications
+         * Replications Check
+         * Replication Latency Check
+         ......................... ANOLIS passed test Replications
+      Starting test: RidManager
+         * Available RID Pool for the Domain is 4602 to 1073741823
+         * Axolotl.eko.lan is the RID Master
+         * DsBind with RID Master was successful
+         * rIDAllocationPool is 3602 to 4101
+         * rIDPreviousAllocationPool is 3602 to 4101
+         * rIDNextRID: 3603
+         ......................... ANOLIS passed test RidManager
+      Starting test: Services
+         * Checking Service: EventSystem
+         * Checking Service: RpcSs
+         * Checking Service: NTDS
+         * Checking Service: DnsCache
+         * Checking Service: DFSR
+         * Checking Service: IsmServ
+         * Checking Service: kdc
+         * Checking Service: SamSs
+         * Checking Service: LanmanServer
+         * Checking Service: LanmanWorkstation
+         * Checking Service: w32time
+         * Checking Service: NETLOGON
+         ......................... ANOLIS passed test Services
+      Starting test: SystemLog
+         * The System Event log test
+         The event log System on server Anolis.eko.lan could not be queried,
+         error 0x6ba "The RPC server is unavailable."
+         ......................... ANOLIS failed test SystemLog
+      Test omitted by user request: Topology
+      Test omitted by user request: VerifyEnterpriseReferences
+      Starting test: VerifyReferences
+         The system object reference (serverReference)
+         CN=ANOLIS,OU=Domain Controllers,DC=eko,DC=lan and backlink on
+         CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (serverReferenceBL)
+         CN=ANOLIS,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on
+         CN=NTDS Settings,CN=ANOLIS,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=eko,DC=lan
+         are correct. 
+         The system object reference (msDFSR-ComputerReferenceBL)
+         CN=ANOLIS,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=eko,DC=lan
+         and backlink on CN=ANOLIS,OU=Domain Controllers,DC=eko,DC=lan are
+         correct. 
+         ......................... ANOLIS passed test VerifyReferences
+      Test omitted by user request: VerifyReplicas
+  
